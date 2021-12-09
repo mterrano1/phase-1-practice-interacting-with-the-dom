@@ -7,11 +7,17 @@ const minusButton = document.querySelector('#minus');
 const likeButton = document.querySelector('#heart');
 const submitButton = document.querySelector('#submit');
 let ul = document.querySelector('ul');
-let li = document.createElement('li');
+// let li = document.createElement('li');
 
 let likedNumbers = {
     numberLiked: '',
     timesNumberLiked: '',
+}
+
+function numberUpdates(obj, key, value) {
+    obj[key] = value;
+
+    return obj;
 }
 
 // console.log(likedNumbers.numberLiked)
@@ -28,12 +34,6 @@ function enableButtons(){
     minusButton.disabled = false
     likeButton.disabled = false
     submitButton.disabled = false    
-}
-
-function numberUpdates(obj, key, value) {
-    obj[key] = value;
-
-    return obj;
 }
 
 function counterValue() {
@@ -84,9 +84,38 @@ minusButton.addEventListener('click', function() {
 });
 
 likeButton.addEventListener('click', function() {
-    // likedNumbers.numberLiked = num
-    console.log(num)
-    // liked()
+    // let li = document.createElement('li');
+    // let currentLi = document.getElementById(num);
+    // if (currentLi === null){
+    //     li.innerText = num
+    //     li.id = num
+    //     li.className = 0
+    //     ul.appendChild(li)
+    // }
+    // else if (currentLi){
+    //     console.log('tapped again')
+    //     let timesClicked = parseInt(currentLi.className)
+    //     console.log(currentLi.id)
+    //     // console.log(`${currentLi.id} clicked ${timesClicked}`)
+    //     currentLi.className = timesClicked
+    // }
+    likedNumber()
 })
-
+// function likedNumber() {
+//     let li = document.createElement('li');
+//     let currentLi = document.getElementById(num);
+//     if (currentLi === null){
+//         li.innerText = `${currentLi.id} has been liked 1 time`
+//         li.id = num
+//         li.className = 0
+//         // ul.appendChild(li)
+//     }
+//     else if (currentLi){
+//         let timesClicked = parseInt(currentLi.className)+1
+//         // console.log(`${currentLi.id} clicked ${timesClicked}`)
+//         currentLi.className = timesClicked
+//         li.innerText = `${currentLi.id} has been liked ${timesClicked} times`
+//         // ul.appendChild(li)
+//     }
+// }
 
