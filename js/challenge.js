@@ -9,6 +9,7 @@ const likeButton = document.querySelector('#heart');
 const submitButton = document.querySelector('#submit');
 const comments = document.querySelector('h3');
 let ul = document.querySelector('ul');
+let form = document.querySelector('form')
 
 //Functions
 
@@ -86,18 +87,9 @@ likeButton.addEventListener('click', () => {
     likedNumber()
 })
 
-document.addEventListener('DOMContentLoaded', () => {
-    let form = document.querySelector('form')
-    form.addEventListener('submit', (e) => {
-        e.preventDefault()
-        addComments(e.target.comment.value)
-        form.reset()
-    })
+form.addEventListener('submit', (e) => {
+    e.preventDefault()
+    addComments(e.target.comment.value)
+    form.reset()
 })
-
-// document.querySelector('body').addEventListener('submit', (e) => {
-//     e.preventDefault()
-//     console.log(e.target.comment.value)
-
-// })
 
