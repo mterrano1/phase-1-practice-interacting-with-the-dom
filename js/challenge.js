@@ -1,4 +1,5 @@
 // Global variables
+
 const h1 = document.querySelector('#counter');
 let num = parseInt(h1.innerText);
 const pauseResumeButton = document.querySelector('#pause');
@@ -6,30 +7,25 @@ const addButton = document.querySelector('#plus');
 const minusButton = document.querySelector('#minus');
 const likeButton = document.querySelector('#heart');
 const submitButton = document.querySelector('#submit');
+const comments = document.querySelector('h3');
 let ul = document.querySelector('ul');
-// let li = document.createElement('li');
 
-let likedNumbers = {
-    numberLiked: '',
-    timesNumberLiked: '',
+//Functions
+
+function addComments(userComment) {
+    let p = document.createElement('p');
+    p.textContent = userComment
+    comments.appendChild(p)
 }
 
-function numberUpdates(obj, key, value) {
-    obj[key] = value;
-
-    return obj;
-}
-
-// console.log(likedNumbers.numberLiked)
-
-function disableButtons(){
+function disableButtons() {
     addButton.disabled = true
     minusButton.disabled = true
     likeButton.disabled = true
     submitButton.disabled = true
 }
 
-function enableButtons(){
+function enableButtons() {
     addButton.disabled = false
     minusButton.disabled = false
     likeButton.disabled = false
@@ -46,18 +42,21 @@ function minusCounterValue() {
     h1.innerText = num
 };
 
-// function liked() {
-//     let ul = document.querySelector('ul');
-//     let li = document.createElement('li');
-//     li.appendChild(document.createTextNode(`${num} has been liked 1 times!`));
-//     ul.appendChild(li)
-// }
-
-// function addComment() {
-//     let commentList = document.querySelector('#list');
-//     let p = document.createElement('p');
-//     commentList.appendChild(p)
-// }
+function likedNumber() {
+    let li = document.createElement('li');
+    let currentLi = document.getElementById(num);
+    if (currentLi === null){
+        li.innerText = `${num} has been liked 1 time`
+        li.id = num
+        li.className = 0
+        ul.appendChild(li)
+    }
+    else if (currentLi){
+        let timesClicked = parseInt(currentLi.className)+1
+        currentLi.className = timesClicked
+        currentLi.innerText = `${currentLi.id} has been liked ${timesClicked} times`
+    }
+}
 
 let startCounter = setInterval(counterValue, 1000);
 
@@ -75,47 +74,30 @@ pauseResumeButton.addEventListener('click', function() {
     }
 });
 
-addButton.addEventListener('click', function() {
+addButton.addEventListener('click', () => {
     counterValue()
 });
 
-minusButton.addEventListener('click', function() {
+minusButton.addEventListener('click', () => {
     minusCounterValue()
 });
 
-likeButton.addEventListener('click', function() {
-    // let li = document.createElement('li');
-    // let currentLi = document.getElementById(num);
-    // if (currentLi === null){
-    //     li.innerText = num
-    //     li.id = num
-    //     li.className = 0
-    //     ul.appendChild(li)
-    // }
-    // else if (currentLi){
-    //     console.log('tapped again')
-    //     let timesClicked = parseInt(currentLi.className)
-    //     console.log(currentLi.id)
-    //     // console.log(`${currentLi.id} clicked ${timesClicked}`)
-    //     currentLi.className = timesClicked
-    // }
+likeButton.addEventListener('click', () => {
     likedNumber()
 })
-// function likedNumber() {
-//     let li = document.createElement('li');
-//     let currentLi = document.getElementById(num);
-//     if (currentLi === null){
-//         li.innerText = `${currentLi.id} has been liked 1 time`
-//         li.id = num
-//         li.className = 0
-//         // ul.appendChild(li)
-//     }
-//     else if (currentLi){
-//         let timesClicked = parseInt(currentLi.className)+1
-//         // console.log(`${currentLi.id} clicked ${timesClicked}`)
-//         currentLi.className = timesClicked
-//         li.innerText = `${currentLi.id} has been liked ${timesClicked} times`
-//         // ul.appendChild(li)
-//     }
-// }
+
+document.addEventListener('DOMContentLoaded', () => {
+    let form = document.querySelector('form')
+    form.addEventListener('submit', (e) => {
+        e.preventDefault()
+        addComments(e.target.comment.value)
+        form.reset()
+    })
+})
+
+// document.querySelector('body').addEventListener('submit', (e) => {
+//     e.preventDefault()
+//     console.log(e.target.comment.value)
+
+// })
 
